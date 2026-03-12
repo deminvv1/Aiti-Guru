@@ -20,7 +20,7 @@ export const AuthCard = () => {
     if (error) setError(null);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const data = await loginByUsername(formData);
@@ -30,9 +30,12 @@ export const AuthCard = () => {
         nav.push("/goobs");
       }
       toast.success("Вы успешно авторизовались");
-    } catch (error: any) {
-      console.log(error);
-      setError(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Произошла ошибка");
+      }
     }
   };
 
@@ -41,7 +44,7 @@ export const AuthCard = () => {
     if (token) {
       nav.push("/goobs");
     }
-  }, []);
+  }, [nav]);
 
   return (
     <form onSubmit={onSubmit}>

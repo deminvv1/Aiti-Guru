@@ -90,7 +90,7 @@ export const ProductsTable = () => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [nav]);
 
   return (
     <div className="p-6 bg-[#F8F9FB] min-h-screen font-sans">
