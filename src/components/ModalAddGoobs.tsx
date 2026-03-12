@@ -45,13 +45,17 @@ export function AddProductModal() {
           </div>
           
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Категория</label>
-            <Input placeholder="Электроника" required />
+            <label className="text-sm font-medium">Цена, ₽</label>
+            <Input type="number" placeholder="0" required />
           </div>
 
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Цена, ₽</label>
-            <Input type="number" placeholder="0" required />
+            <label className="text-sm font-medium">Вендор</label>
+            <Input placeholder="Samsung" required />
+          </div>
+          <div className="grid gap-2">
+            <label className="text-sm font-medium">Артикул</label>
+            <Input placeholder="GRO-BAD-GRE-026" required />
           </div>
 
           <DialogFooter className="pt-4 bg-white">
