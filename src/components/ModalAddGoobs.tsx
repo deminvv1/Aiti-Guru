@@ -12,57 +12,58 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus } from "lucide-react";
+import toast from "react-hot-toast";
 
 export function AddProductModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Здесь будет логика отправки данных на сервер (POST запрос)
-    console.log("Товар добавлен");
-    setIsOpen(false); // Закрываем окно после успеха
+    toast.success("Товар добавлен");
+    setIsOpen(false);
   };
+  
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      {/* Кнопка, которая открывает модалку */}
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-2 bg-[#2D3FE7] hover:bg-[#1e2dbd]">
+        <Button className="flex items-center gap-2 bg-[#2D3FE7] hover:bg-[#1e2dbd] cursor-pointer h-10">
           <Plus size={20} />
           <span>Добавить</span>
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] bg-white">
         <DialogHeader>
           <DialogTitle>Добавить новый товар</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 py-4">
-          <div className="space-y-2">
+        <form onSubmit={handleSubmit} className="space-y-6 py-4">
+          <div className="grid gap-2">
             <label className="text-sm font-medium">Наименование</label>
             <Input placeholder="Например, iPhone 15" required />
           </div>
           
-          <div className="space-y-2">
+          <div className="grid gap-2">
             <label className="text-sm font-medium">Категория</label>
             <Input placeholder="Электроника" required />
           </div>
 
-          <div className="space-y-2">
+          <div className="grid gap-2">
             <label className="text-sm font-medium">Цена, ₽</label>
             <Input type="number" placeholder="0" required />
           </div>
 
-          <DialogFooter className="pt-4">
+          <DialogFooter className="pt-4 bg-white">
             <Button 
               type="button" 
               variant="outline" 
+              className="cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Отмена
             </Button>
-            <Button type="submit" className="bg-[#2D3FE7]">
+            <Button type="submit" className="bg-[#2D3FE7] cursor-pointer">
               Сохранить
             </Button>
           </DialogFooter>

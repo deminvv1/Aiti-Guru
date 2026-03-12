@@ -13,6 +13,7 @@ import { Product } from "../shared/types";
 import { getAuthToken, removeAuthToken } from "../shared/lib/cookies";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { AddProductModal } from "../components/ModalAddGoobs";
 
 export const ProductsTable = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -52,15 +53,15 @@ export const ProductsTable = () => {
   };
 
   const processedProducts = useMemo(() => {
-  const filtered = products.filter(
-    (p) =>
-      p.title.toLowerCase().includes(select.toLowerCase()) ||
-      p.category.toLowerCase().includes(select.toLowerCase())
-  );
-  return [...filtered].sort((a, b) => 
-    sortOrder === 'asc' ? a.price - b.price : b.price - a.price
-  );
-}, [products, select, sortOrder]);
+    const filtered = products.filter(
+      (p) =>
+        p.title.toLowerCase().includes(select.toLowerCase()) ||
+        p.category.toLowerCase().includes(select.toLowerCase()),
+    );
+    return [...filtered].sort((a, b) =>
+      sortOrder === "asc" ? a.price - b.price : b.price - a.price,
+    );
+  }, [products, select, sortOrder]);
 
   const currentProducts = processedProducts.slice(
     indexOfFirstProduct,
@@ -123,15 +124,16 @@ export const ProductsTable = () => {
         <h2 className="font-semibold text-slate-800">Все позиции</h2>
         <div className="flex gap-2">
           <button className="p-2 text-slate-500 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
-            <RotateCcw size={20} />
+            <RotateCcw size={20} className="cursor-pointer" />
           </button>
           <button className="p-2 text-slate-500 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
-            <ArrowDownUp onClick={handleSort}/>
+            <ArrowDownUp
+              onClick={handleSort}
+              size={20}
+              className="cursor-pointer"
+            />
           </button>
-          <button className="flex items-center gap-2 bg-[#2D3FE7] hover:bg-[#1e2dbd] text-white px-4 py-2 rounded-lg transition-colors shadow-sm">
-            <Plus size={20} />
-            <span className="text-sm font-medium">Добавить</span>
-          </button>
+          <AddProductModal />
         </div>
       </div>
 
@@ -224,12 +226,14 @@ export const ProductsTable = () => {
           </span>{" "}
           из {products.length}
         </div>
-
         <div className="flex items-center gap-1">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="p-2 text-slate-400 hover:text-slate-600 disabled:opacity-30"
+            className={`p-2 transition-all duration-300 ${
+              currentPage === 1
+                ? "opacity-0 pointer-events-none -translate-x-2"
+                : "opacity-100 cursor-pointer text-slate-400 hover:text-blue-600"
+            }`}
           >
             <ChevronLeft size={20} />
           </button>
@@ -238,7 +242,7 @@ export const ProductsTable = () => {
             <button
               key={n}
               onClick={() => setCurrentPage(n)}
-              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors border ${
+              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors border cursor-pointer ${
                 n === currentPage
                   ? "bg-blue-600 text-white"
                   : "text-slate-400 hover:bg-slate-50"
@@ -247,13 +251,15 @@ export const ProductsTable = () => {
               {n}
             </button>
           ))}
-
           <button
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
-            disabled={currentPage === totalPages}
-            className="p-2 text-slate-400 hover:text-slate-600 disabled:opacity-30"
+            className={`p-2 transition-all duration-300 ${
+              currentPage === totalPages
+                ? "opacity-0 pointer-events-none translate-x-2"
+                : "opacity-100 cursor-pointer text-slate-400 hover:text-blue-600"
+            }`}
           >
             <ChevronRight size={20} />
           </button>

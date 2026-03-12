@@ -8,13 +8,17 @@ export const setAuthToken = (accessToken: string, rememberMe: boolean) => {
 
   if (rememberMe) {
     options.expires = 7;
+    Cookies.set("auth-token", accessToken, options);
+  } else {
+    sessionStorage.setItem("auth-token", accessToken); // для удаления кук при закрытии вкладки, без галочки
   }
-
-  Cookies.set("auth-token", accessToken, options);
 };
 
-export const getAuthToken = () => Cookies.get("auth-token");
+export const getAuthToken = () => {
+  return Cookies.get("auth-token") || sessionStorage.getItem("auth-token");
+};
+
 export const removeAuthToken = () => {
-  Cookies.remove("__next_hmr_refresh_hash__", { path: "/" });
   Cookies.remove("auth-token");
+  sessionStorage.removeItem("auth-token");
 };
