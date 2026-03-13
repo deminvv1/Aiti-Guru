@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Goods Management System**
 
-## Getting Started
+Профессиональный интерфейс управления товарными сущностями, построенный на современных технологиях: **Next.js 16** и **React 19**.
 
-First, run the development server:
+**Демо:** [https://aiti-guru-pi.vercel.app/] 
+Логин и пароль взяты с [https://dummyjson.com/docs/auth]
+**Логин**: emilys
+**Пароль**: emilyspass
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Технический стек**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Основа:** `Next.js 16.1.6` + `React 19.0`
+* **Стилизация:** `Tailwind CSS 4.0` — использование нового движка Lightning CSS для мгновенной сборки стилей.
+* **Типизация:** `TypeScript 5.7` — строгая типизация всей бизнес-логики и API-ответов.
+* **UI-компоненты:** `Radix UI` + `Lucide Icons` — доступные и функциональные компоненты.
+* **Линтинг:** `ESLint 9` (Flat Config) — современный стандарт проверки качества кода.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Архитектурные решения**
 
-## Learn More
+**1. State Management**
+Управление состоянием реализовано через:
+* **Local State (`useState`, `useMemo`):** Для изолированной логики таблиц и форм.
 
-To learn more about Next.js, take a look at the following resources:
+**2. Производительность таблиц**
+Для работы с большими списками товаров применена мемоизация вычислений при сортировке и фильтрации. Интерфейс остается плавным даже при активном взаимодействии с данными.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**3. Tailwind 4 & Design System**
+Стилизация построена на базе Tailwind 4, что позволило отказаться от тяжелых конфигурационных файлов JS/PostCSS в пользу чистого CSS-подхода и переменных окружения.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+**Установка и запуск**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Клонирование:**
+    ```bash
+    git clone
+    ```
+2.  **Зависимости (Node.js 22+):**
+    ```bash
+    npm install
+    ```
+3.  **Запуск:**
+    ```bash
+    npm run dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Разработчик:** Демин Владислав
+**Стек:** Frontend (React / Next.js)
